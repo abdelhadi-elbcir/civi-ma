@@ -5,6 +5,7 @@ import DetailsFilling from "./Pages/DetailsFilling";
 import CheckSelectedId from "./Components/CheckSelectedId";
 import AboutUs from "./Pages/AboutUs";
 import MyResumes from "./Pages/MyResumes";
+import Terms from "./Pages/Terms";
 import Notfound from "./Components/Notfound";
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
         />
         <Route exact path="/my/resumes" element={<MyResumes />} />
         <Route exact path="/about-us" element={<AboutUs />} />
+        <Route exact path="/terms" element={<Terms/>} />
         {/* If someone attempts to navigate to a page that does not exist, they will be redirected to a 404 page. */}
         <Route exact path="*" element={<Notfound />} />
       </Routes>
