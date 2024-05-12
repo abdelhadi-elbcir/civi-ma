@@ -9,7 +9,7 @@ const BackNextBtnComponent = (props) => {
         <Button
           onClick={props.onBack}
           className="outlined-btn"
-          sx={{ marginRight: "20px" }}
+          sx={{ marginRight: "20px"}}
           variant="outlined">
           {props.backTitle}
         </Button>

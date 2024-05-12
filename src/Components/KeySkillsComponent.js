@@ -56,7 +56,7 @@ function KeySkillsComponent(props) {
 
   return (
     <Paper elevation={3} className="key-skills-paper">
-      <h2 className="key-skills-heading">Key Skills</h2>
+      <h2 className="key-skills-heading">Compétences</h2>
       <Divider />
       <form onSubmit={handleSubmit(handlePreview)}>
         <div className="key-skills-form-fields">
@@ -92,7 +92,7 @@ function KeySkillsComponent(props) {
             className="add-new-btn"
             variant="text"
             onClick={props.onAddNewSkill}>
-            Add new
+            Ajouter un nouveau
           </Button>
         )}
         <Divider className="key-skills-divider" />
@@ -101,8 +101,8 @@ function KeySkillsComponent(props) {
           loading={loading}
           tab={props.tab}
           onBack={handleBack}
-          nextTitle={"Preview"}
-          backTitle={"Back"}
+          nextTitle={"Aperçu"}
+          backTitle={"Retour"}
         />
       </form>
     </Paper>

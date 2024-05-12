@@ -7,6 +7,7 @@ import { Button, Stack } from "@mui/material";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { selectTemplate } from "../Redux/actions";
+import Footer from "../Components/Common/Footer";
 
 const mapStateToProps = (state) => ({
   selectedTemplateId: state.selectedTemplateReducer.selectedTemplateId,
@@ -33,8 +34,8 @@ const Home = (props) => {
       <>
          <div className="home">
         <div className="home-templates-cont">
-          <h2 className="template-header-title">Templates</h2>
-          <p className="template-select-text">Select a template to get started</p>
+          <h2 className="template-header-title">Modèles</h2>
+          <p className="template-select-text">Sélectionnez un modèle pour commencer</p>
           
           <Stack
             sx={{
@@ -62,7 +63,7 @@ const Home = (props) => {
                     onClick={() => navigateToFillDetails(template.id)}
                     size="medium"
                     variant="contained">
-                    Use Template
+                    Utiliser ce modèle
                   </Button>
                 </div>
               );
@@ -71,6 +72,7 @@ const Home = (props) => {
         </div>
       </div>
       </>
+      <Footer/>
     </>
   );
 };

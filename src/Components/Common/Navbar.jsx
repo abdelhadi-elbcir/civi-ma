@@ -13,7 +13,6 @@ import Typography from "@mui/material/Typography";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import logoresume from "./logoresume.png";
 
-
 const drawerWidth = 240;
 const logoTheme = createTheme({
   palette: {
@@ -36,11 +35,7 @@ function Navbar(props) {
       <Typography variant="h6" sx={{ my: 2 }}>
         <NavLink to="/">
           {" "}
-          <img
-            src={logoresume}
-            height="40px"
-            alt="logoapp"
-          />
+          <img src={logoresume} height="40px" alt="logoapp" />
         </NavLink>
       </Typography>
       <Divider />
@@ -51,15 +46,19 @@ function Navbar(props) {
           textAlign: "left",
           paddingLeft: "20px",
           flexDirection: "column",
-        }}>
+        }}
+      >
         <NavLink className="nav-link" to="/" color="inherit">
-          Resume Templates
+          Modèles de CV
         </NavLink>
         <NavLink to="/my/resumes" className="nav-link" color="inherit">
-          My Resumes
+          Ma Création
         </NavLink>
         <NavLink to="/about-us" color="inherit" className="nav-link">
-          About us
+          À propos
+        </NavLink>
+        <NavLink to="/terms" color="inherit" className="nav-link">
+          Termes et Conditions
         </NavLink>
       </List>
     </Box>
@@ -69,7 +68,12 @@ function Navbar(props) {
     <>
       <Box sx={{ display: "flex" }}>
         <ThemeProvider theme={logoTheme}>
-          <AppBar component="nav" position="sticky" className="appbar" sx={{ color: "primary", boxShadow: "none" }}>
+          <AppBar
+            component="nav"
+            position="sticky"
+            className="appbar"
+            sx={{ color: "primary", boxShadow: "none" }}
+          >
             <Toolbar id="toolbar">
               <IconButton
                 color="inherit"
@@ -77,7 +81,8 @@ function Navbar(props) {
                 edge="start"
                 id="icon"
                 onClick={handleDrawerToggle}
-                sx={{ mr: 2, display: { sm: "none" } }}>
+                sx={{ mr: 2, display: { sm: "none" } }}
+              >
                 <MenuIcon />
               </IconButton>
               <Typography
@@ -89,26 +94,39 @@ function Navbar(props) {
                   fontSize: "25px",
                   position: "relative",
                   top: "5px",
-                }}>
+                }}
+              >
                 <NavLink to="/" className="homeIcon">
                   {" "}
                   <img
                     className="logo"
                     src={logoresume}
-                    height="30px"
+                    height="10px"
+                    width={"100px"}
                     alt="logoapp"
                   />
                 </NavLink>
               </Typography>
               <Box sx={{ display: { xs: "none", sm: "block" } }}>
                 <NavLink to="/" className="nav-link" color="inherit">
-                  Resume Templates
+                  Modèles de CV
                 </NavLink>
                 <NavLink to="/my/resumes" className="nav-link" color="inherit">
-                  My Resumes
+                  Ma Création
                 </NavLink>
-                <NavLink to="/about-us" className="nav-link aboutUs" color="inherit">
-                  About Us
+                <NavLink
+                  to="/about-us"
+                  className="nav-link aboutUs"
+                  color="inherit"
+                >
+                  À propos
+                </NavLink>
+                <NavLink
+                  to="/terms"
+                  className="nav-link aboutUs"
+                  color="inherit"
+                >
+                  Termes et Conditions
                 </NavLink>
               </Box>
             </Toolbar>
@@ -128,7 +146,8 @@ function Navbar(props) {
                 boxSizing: "border-box",
                 width: drawerWidth,
               },
-            }}>
+            }}
+          >
             {drawer}
           </Drawer>
         </Box>

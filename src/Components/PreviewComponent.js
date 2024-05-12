@@ -131,7 +131,7 @@ const PreviewComponent = (props) => {
         },
       }}
       className="preview-container">
-      <h2 className="preview-header-title">Resume Preview</h2>
+      <h2 className="preview-header-title">CV Aperçu</h2>
       <div className="resume-preview-grid-container">
         <div className="resume-preview-grid-item" id="previewresume">
           {templates.map((template, index) => {
@@ -140,7 +140,7 @@ const PreviewComponent = (props) => {
         </div>
         <div className="resume-preview-grid-item">
           <div className="resume-save-container">
-            <h3 className="resume-save-title">Create File Name</h3>
+            <h3 className="resume-save-title">Créer un nom de fichier</h3>
             <TextField
               value={resumeName}
               onChange={(e) => setResumeName(e.target.value)}
@@ -157,7 +157,7 @@ const PreviewComponent = (props) => {
                 className="outlined-btn"
                 sx={{ marginRight: "20px" }}
                 variant="outlined">
-                Back
+                Retour
               </Button>
               {loading ? (
                 <CircularProgress size={25} />
@@ -166,7 +166,7 @@ const PreviewComponent = (props) => {
                   onClick={handleSave}
                   className="contained-btn"
                   variant="contained">
-                  Save
+                  Sauvegarder
                 </Button>
               )}
             </div>

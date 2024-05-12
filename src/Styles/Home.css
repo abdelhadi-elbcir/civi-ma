@@ -45,6 +45,7 @@
   z-index: 5;
   visibility: hidden;
   text-transform: capitalize;
+  background-color:#007456;
 }
 
 .templates-img-cont:hover .MuiButtonBase-root.MuiButton-root {

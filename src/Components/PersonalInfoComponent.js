@@ -14,7 +14,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { addPersonalInfo } from "../Redux/actions";
 import { useForm } from "react-hook-form";
-
+import testAcc from "./user.png";
 const mapStateToProps = (state) => ({
   personalInfo: state.personalInfoReducer.personalInfo,
 });
@@ -88,7 +88,8 @@ const PersonalInfoComponent = (props) => {
               right: 8,
               top: 8,
               color: (theme) => theme.palette.grey[500],
-            }}>
+            }}
+          >
             <CloseIcon />
           </IconButton>
         ) : null}
@@ -143,27 +144,28 @@ const PersonalInfoComponent = (props) => {
   return (
     <Paper className="personal-info-paper" elevation={3}>
       <Avatar
-        sx={{ width: 120, height: 120, marginBottom: 1 }}
+        sx={{ width: 120, height: 120, marginBottom: 1, color: "#007456" }}
         alt="profile img"
-        src={
-          img.length ? img : `https://img.icons8.com/color/344/test-account.png`
-        }
+        src={img.length ? img : testAcc}
       />
       <div>
         <Button
           className="change-profile-photo-btn"
           variant="outlined"
-          onClick={handleClickOpen}>
-          Change Profile Photo
+          onClick={handleClickOpen}
+        >
+          Changer la photo de profil
         </Button>
         <BootstrapDialog
           onClose={handleClose}
           aria-labelledby="customized-dialog-title"
-          open={open}>
+          open={open}
+        >
           <BootstrapDialogTitle
             id="customized-dialog-title"
-            onClose={handleClose}>
-            Update Image
+            onClose={handleClose}
+          >
+            Mettre à jour l'image
           </BootstrapDialogTitle>
           <DialogContent>
             <Avatar1
@@ -175,7 +177,7 @@ const PersonalInfoComponent = (props) => {
           </DialogContent>
           <DialogActions>
             <Button autoFocus variant="contained" onClick={saveImage}>
-              Save
+              Sauvegarder
             </Button>
           </DialogActions>
         </BootstrapDialog>
@@ -183,7 +185,7 @@ const PersonalInfoComponent = (props) => {
       <form onSubmit={handleSubmit(handleNext)}>
         <div className="personal-info-form-fields">
           <InputComponent
-            title={"First Name"}
+            title={"Prénom"}
             type={"text"}
             name={"firstName"}
             register={register}
@@ -199,7 +201,7 @@ const PersonalInfoComponent = (props) => {
             errorMessage={errors.firstName ? errors.firstName.message : null}
           />
           <InputComponent
-            title={"Last Name"}
+            title={"Nom de famille"}
             type={"text"}
             name={"lastName"}
             register={register}
@@ -231,7 +233,7 @@ const PersonalInfoComponent = (props) => {
             errorMessage={errors.email ? errors.email.message : null}
           />
           <InputComponent
-            title={"Mobile"}
+            title={"Téléphone"}
             type={"number"}
             name={"mobile"}
             register={register}
@@ -248,7 +250,7 @@ const PersonalInfoComponent = (props) => {
           />
         </div>
         <InputComponent
-          title={"Address"}
+          title={"Adresse"}
           type={"text"}
           name={"address"}
           register={register}
@@ -265,7 +267,7 @@ const PersonalInfoComponent = (props) => {
         />
         <div style={{ marginTop: 20 }} className="personal-info-form-fields">
           <InputComponent
-            title={"City"}
+            title={"Ville"}
             type={"text"}
             name={"city"}
             register={register}
@@ -281,7 +283,7 @@ const PersonalInfoComponent = (props) => {
             errorMessage={errors.city ? errors.city.message : null}
           />
           <InputComponent
-            title={"State"}
+            title={"État"}
             type={"text"}
             name={"state"}
             register={register}
@@ -297,7 +299,7 @@ const PersonalInfoComponent = (props) => {
             errorMessage={errors.state ? errors.state.message : null}
           />
           <InputComponent
-            title={"Postal Code"}
+            title={"Code Postal"}
             type={"number"}
             name={"postalCode"}
             register={register}
@@ -314,7 +316,7 @@ const PersonalInfoComponent = (props) => {
           />
         </div>
         <InputComponent
-          title={"Objective"}
+          title={"Decsription"}
           type={"text"}
           name={"objective"}
           register={register}
@@ -334,8 +336,8 @@ const PersonalInfoComponent = (props) => {
           // onNext={() => handleSubmit(handleNext)}
           loading={loading}
           tab={props.tab}
-          nextTitle={"Next"}
-          backTitle={"Back"}
+          nextTitle={"Suivant"}
+          backTitle={"Retour"}
         />
       </form>
       <Snackbar
@@ -343,11 +345,12 @@ const PersonalInfoComponent = (props) => {
         open={imgSnackbar}
         autoHideDuration={3000}
         onClose={handleCloseSnackbar}
-        message="Please select a profile image"
+        message="Veuillez sélectionner une image de profil"
         key={vertical + horizontal}
       />
     </Paper>
   );
+  
 };
 
 export default connect(

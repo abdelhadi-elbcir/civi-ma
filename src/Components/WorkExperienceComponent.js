@@ -1,5 +1,5 @@
 import { Button, Divider, MenuItem, Paper, Select } from "@mui/material";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import "../Styles/WorkExperienceComponent.css";
 import { connect } from "react-redux";
 import BackNextBtnComponent from "./BackNextBtnComponent";
@@ -17,18 +17,11 @@ const mapDispatchToProps = (dispatch) => ({
   setAllExperience: (experiences) => dispatch(addAllExperience(experiences)),
 });
 
-const years = [
-  "2022",
-  "2021",
-  "2020",
-  "2019",
-  "2018",
-  "2017",
-  "2016",
-  "2015",
-  "2014",
-  "2013",
-];
+const years = [];
+
+for (let year = 2023; year >= 1980; year--) {
+  years.push(year.toString());
+}
 
 const WorkExperienceComponent = (props) => {
   const [loading, setLoading] = useState(false);
@@ -50,6 +43,8 @@ const WorkExperienceComponent = (props) => {
 
     let experienceOne = {};
     let experienceTwo = {};
+    let experienceThree = {};
+    let experienceFour = {};
 
     for (let index in data) {
       // console.log(index.slice(0, index.length));
@@ -66,7 +61,9 @@ const WorkExperienceComponent = (props) => {
       props.setAllExperience([
         { ...experienceOne, id: 1 },
         { ...experienceTwo, id: 2 },
-      ]);
+        experienceThree && { ...experienceThree, id: 3 },
+        experienceFour && { ...experienceFour, id: 4 },
+      ].filter(Boolean));
     } else {
       props.setAllExperience([{ ...experienceOne, id: 1 }]);
     }
@@ -111,16 +108,16 @@ const WorkExperienceComponent = (props) => {
 
   return (
     <Paper className="work-experience-paper" elevation={3}>
-      <h2 className="work-experience-heading">Work Experience</h2>
+      <h2 className="work-experience-heading">L'expérience professionnelle</h2>
       <form onSubmit={handleSubmit(handleNext)}>
         {props.experiences.map((experience) => {
           return (
             <div key={experience.id} className="experience-cont">
-              <h3 className="experience-heading">Experience {experience.id}</h3>
+              <h3 className="experience-heading">Expérience {experience.id}</h3>
               <Divider sx={{ margin: "5px 0px" }} />
               <div className="experience-form-cont">
                 <InputComponent
-                  title={"Job Title"}
+                  title={"Titre d'emploi"}
                   type={"text"}
                   name={"jobTitle" + experience.id}
                   register={register}
@@ -137,7 +134,7 @@ const WorkExperienceComponent = (props) => {
                   }
                 />
                 <InputComponent
-                  title={"Organization Name"}
+                  title={"nom de l'organisation"}
                   type={"text"}
                   name={"organizationName" + experience.id}
                   register={register}
@@ -156,13 +153,14 @@ const WorkExperienceComponent = (props) => {
                   }
                 />
                 <SelectComponent
-                  title={"Start Year"}
+                  title={"Année de début"}
                   errorMessage={
                     errors[`startYear${experience.id}`]
                       ? errors[`startYear${experience.id}`].message
                       : null
                   }
-                  error={errors[`startYear${experience.id}`] ? true : false}>
+                  error={errors[`startYear${experience.id}`] ? true : false}
+                >
                   <Controller
                     render={(props) => {
                       return (
@@ -175,7 +173,8 @@ const WorkExperienceComponent = (props) => {
                                 ? true
                                 : false
                               : false
-                          }>
+                          }
+                        >
                           {years.map((year, index) => {
                             return (
                               <MenuItem key={index} value={year}>
@@ -193,13 +192,14 @@ const WorkExperienceComponent = (props) => {
                   />
                 </SelectComponent>
                 <SelectComponent
-                  title={"End Year"}
+                  title={"Fin d'année"}
                   errorMessage={
                     errors[`endYear${experience.id}`]
                       ? errors[`endYear${experience.id}`].message
                       : null
                   }
-                  error={errors[`endYear${experience.id}`] ? true : false}>
+                  error={errors[`endYear${experience.id}`] ? true : false}
+                >
                   <Controller
                     render={(props) => (
                       <Select
@@ -211,7 +211,8 @@ const WorkExperienceComponent = (props) => {
                               ? true
                               : false
                             : false
-                        }>
+                        }
+                      >
                         {years.map((year, index) => {
                           return (
                             <MenuItem key={index} value={year}>
@@ -231,10 +232,14 @@ const WorkExperienceComponent = (props) => {
             </div>
           );
         })}
-        {props.experiences.length === 2 ? null : (
+        {props.experiences.length === 4 ? null : (
           <div className="add-new-btn-cont">
-            <Button onClick={addNewExperience} variant="text">
-              Add New
+            <Button
+              style={{ color: "#007456" }}
+              onClick={addNewExperience}
+              variant="text"
+            >
+              Ajouter une nouveau
             </Button>
           </div>
         )}
@@ -244,8 +249,8 @@ const WorkExperienceComponent = (props) => {
           onBack={handleBack}
           loading={loading}
           tab={props.tab}
-          nextTitle={"Next"}
-          backTitle={"Back"}
+          nextTitle={"Suivant"}
+          backTitle={"Retour"}
         />
       </form>
     </Paper>

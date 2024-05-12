@@ -59,25 +59,27 @@ const DetailFillingSidebar = (props) => {
             maxWidth: 360,
             boxShadow: "0px 0px 4px 0px rgb(228, 228, 228)",
             height: "fit-content",
-          }}>
+          }}
+        >
           <List disablePadding>
             <ListItem disablePadding>
               <ListItemButton
                 component="a"
                 sx={
                   props.tab === 0
-                    ? { borderLeft: "3px solid rgb(0, 128, 255)" }
+                    ? { borderLeft: "3px solid #007456" }
                     : null
-                }>
+                }
+              >
                 <AccountCircleOutlinedIcon
-                  color={props.tab === 0 ? "info" : "disabled"}
+                  color={props.tab === 0 ? "#007456" : "disabled"}
                 />
                 <ListItemText
                   className="IcoSpace"
-                  primary="Personal Info"
+                  primary="Informations personnelles"
                   sx={
                     props.tab === 0
-                      ? { color: "rgb(0, 128, 255)", paddingLeft: "8px" }
+                      ? { color: "#007456", paddingLeft: "8px" }
                       : null
                   }
                 />
@@ -89,18 +91,19 @@ const DetailFillingSidebar = (props) => {
                 component="a"
                 sx={
                   props.tab === 1
-                    ? { borderLeft: "3px solid rgb(0, 128, 255)" }
+                    ? { borderLeft: "3px solid #007456" }
                     : null
-                }>
+                }
+              >
                 <WorkHistoryRoundedIcon
-                  color={props.tab === 1 ? "info" : "disabled"}
+                  color={props.tab === 1 ? "#007456" : "disabled"}
                 />
                 <ListItemText
                   className="IcoSpace"
-                  primary="Work Experience"
+                  primary="L'expérience professionnelle"
                   sx={
                     props.tab === 1
-                      ? { color: "rgb(0, 128, 255)", paddingLeft: "8px" }
+                      ? { color: "#007456", paddingLeft: "8px" }
                       : null
                   }
                 />
@@ -112,18 +115,19 @@ const DetailFillingSidebar = (props) => {
                 component="a"
                 sx={
                   props.tab === 2
-                    ? { borderLeft: "3px solid rgb(0, 128, 255)" }
+                    ? { borderLeft: "3px solid #007456" }
                     : null
-                }>
+                }
+              >
                 <SchoolRoundedIcon
-                  color={props.tab === 2 ? "info" : "disabled"}
+                  color={props.tab === 2 ? "#007456" : "disabled"}
                 />
                 <ListItemText
                   className="IcoSpace"
-                  primary="Education"
+                  primary="Éducation"
                   sx={
                     props.tab === 2
-                      ? { color: "rgb(0, 128, 255)", paddingLeft: "8px" }
+                      ? { color: "#007456", paddingLeft: "8px" }
                       : null
                   }
                 />
@@ -135,18 +139,19 @@ const DetailFillingSidebar = (props) => {
                 component="a"
                 sx={
                   props.tab === 3
-                    ? { borderLeft: "3px solid rgb(0, 128, 255)" }
+                    ? { borderLeft: "3px solid #007456" }
                     : null
-                }>
+                }
+              >
                 <StarsRoundedIcon
-                  color={props.tab === 3 ? "info" : "disabled"}
+                  color={props.tab === 3 ? "#007456" : "disabled"}
                 />
                 <ListItemText
                   className="IcoSpace"
-                  primary="Key Skills"
+                  primary="Compétences"
                   sx={
                     props.tab === 3
-                      ? { color: "rgb(0, 128, 255)", paddingLeft: "8px" }
+                      ? { color: "#007456", paddingLeft: "8px" }
                       : null
                   }
                 />
@@ -162,7 +167,8 @@ const DetailFillingSidebar = (props) => {
             aria-controls={open ? "long-menu" : undefined}
             aria-expanded={open ? "true" : undefined}
             aria-haspopup="true"
-            onClick={handleClick}>
+            onClick={handleClick}
+          >
             <MoreVertIcon />
           </IconButton>
           <Menu
@@ -176,78 +182,83 @@ const DetailFillingSidebar = (props) => {
             PaperProps={{
               style: {
                 maxHeight: ITEM_HEIGHT * 4.5,
-                width: "20ch",
+                width: "30ch",
               },
-            }}>
+            }}
+          >
             <MenuItem
-              sx={props.tab === 0 ? { color: "rgb(0, 128, 255)" } : null}
+              sx={props.tab === 0 ? { color: "#007456" } : null}
               onClick={() => {
                 handleClose();
-              }}>
+              }}
+            >
               <AccountCircleOutlinedIcon
-                color={props.tab === 0 ? "info" : "disabled"}
+                color={props.tab === 0 ? "#007456" : "disabled"}
               />
               <ListItemText
                 className="IcoSpace"
-                primary="Personal Info"
+                primary="Informations personnelles"
                 sx={
                   props.tab === 0
-                    ? { color: "rgb(0, 128, 255)", paddingLeft: "8px" }
+                    ? { color: "#007456", paddingLeft: "8px" }
                     : null
                 }
               />
             </MenuItem>
             <Divider />
             <MenuItem
-              sx={props.tab === 1 ? { color: "rgb(0, 128, 255)" } : null}
+              sx={props.tab === 1 ? { color: "#007456" } : null}
               onClick={() => {
                 handleClose();
-              }}>
+              }}
+            >
               <WorkHistoryRoundedIcon
-                color={props.tab === 1 ? "info" : "disabled"}
+                color={props.tab === 1 ? "#007456" : "disabled"}
               />
               <ListItemText
                 className="IcoSpace"
-                primary="Work Experience"
+                primary="L'expérience professionnelle"
                 sx={
                   props.tab === 1
-                    ? { color: "rgb(0, 128, 255)", paddingLeft: "8px" }
+                    ? { color: "#007456", paddingLeft: "8px" }
                     : null
                 }
               />
             </MenuItem>
             <Divider />
             <MenuItem
-              sx={props.tab === 2 ? { color: "rgb(0, 128, 255)" } : null}
+              sx={props.tab === 2 ? { color: "#007456" } : null}
               onClick={() => {
                 handleClose();
-              }}>
+              }}
+            >
               <SchoolRoundedIcon
-                color={props.tab === 2 ? "info" : "disabled"}
+                color={props.tab === 2 ? "#007456" : "disabled"}
               />
               <ListItemText
                 className="IcoSpace"
-                primary="Education"
+                primary="Éducation"
                 sx={
                   props.tab === 2
-                    ? { color: "rgb(0, 128, 255)", paddingLeft: "8px" }
+                    ? { color: "#007456", paddingLeft: "8px" }
                     : null
                 }
               />
             </MenuItem>
             <Divider />
             <MenuItem
-              sx={props.tab === 3 ? { color: "rgb(0, 128, 255)" } : null}
+              sx={props.tab === 3 ? { color: "#007456" } : null}
               onClick={() => {
                 handleClose();
-              }}>
-              <StarsRoundedIcon color={props.tab === 3 ? "info" : "disabled"} />
+              }}
+            >
+              <StarsRoundedIcon color={props.tab === 3 ? "#007456" : "disabled"} />
               <ListItemText
                 className="IcoSpace"
-                primary="Key Skills"
+                primary="Compétences "
                 sx={
                   props.tab === 3
-                    ? { color: "rgb(0, 128, 255)", paddingLeft: "8px" }
+                    ? { color: "#007456", paddingLeft: "8px" }
                     : null
                 }
               />

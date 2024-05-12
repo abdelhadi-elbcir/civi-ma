@@ -16,18 +16,11 @@ const mapDispatchToProps = (dispatch) => ({
   onAddEducation: (details) => dispatch(addEducation(details)),
 });
 
-const years = [
-  "2022",
-  "2021",
-  "2020",
-  "2019",
-  "2018",
-  "2017",
-  "2016",
-  "2015",
-  "2014",
-  "2013",
-];
+const years = [];
+
+for (let year = 2023; year >= 1980; year--) {
+  years.unshift(year.toString());
+}
 
 const EducationComponent = (props) => {
   const [loading, setLoading] = useState(false);
@@ -57,12 +50,12 @@ const EducationComponent = (props) => {
 
   return (
     <Paper className="education-paper" elevation={3}>
-      <h2 className="education-heading">Education Details</h2>
+      <h2 className="education-heading">Détails sur l'éducation</h2>
       <Divider sx={{ margin: "10px 0px" }} />
       <form onSubmit={handleSubmit(handleNext)}>
         <div className="education-form-cont">
           <InputComponent
-            title={"Domain"}
+            title={"Domaine"}
             type={"text"}
             name={"domain"}
             register={register}
@@ -76,7 +69,7 @@ const EducationComponent = (props) => {
           />
           <div></div>
           <InputComponent
-            title={"University"}
+            title={"Université"}
             type={"text"}
             name={"university"}
             register={register}
@@ -92,7 +85,7 @@ const EducationComponent = (props) => {
             errorMessage={errors.university ? errors.university.message : null}
           />
           <InputComponent
-            title={"Degree"}
+            title={"mention"}
             type={"text"}
             name={"degree"}
             register={register}
@@ -105,9 +98,10 @@ const EducationComponent = (props) => {
             errorMessage={errors.degree ? errors.degree.message : null}
           />
           <SelectComponent
-            title={"Start Year"}
+            title={"Année de début"}
             errorMessage={errors.startYear ? errors.startYear.message : null}
-            error={errors.startYear ? true : false}>
+            error={errors.startYear ? true : false}
+          >
             <Controller
               render={(props) => {
                 // console.log(props);
@@ -115,7 +109,8 @@ const EducationComponent = (props) => {
                   <Select
                     value={props.field.value}
                     onChange={props.field.onChange}
-                    error={errors.startYear ? true : false}>
+                    error={errors.startYear ? true : false}
+                  >
                     {years.map((year, index) => {
                       return (
                         <MenuItem key={index} value={year}>
@@ -133,15 +128,17 @@ const EducationComponent = (props) => {
             />
           </SelectComponent>
           <SelectComponent
-            title={"End Year"}
+            title={"Fin d'année"}
             errorMessage={errors.endYear ? errors.endYear.message : null}
-            error={errors.endYear ? true : false}>
+            error={errors.endYear ? true : false}
+          >
             <Controller
               render={(props) => (
                 <Select
                   value={props.field.value}
                   onChange={props.field.onChange}
-                  error={errors.endYear ? true : false}>
+                  error={errors.endYear ? true : false}
+                >
                   {years.map((year, index) => {
                     return (
                       <MenuItem key={index} value={year}>
@@ -164,8 +161,8 @@ const EducationComponent = (props) => {
           onBack={handleBack}
           loading={loading}
           tab={props.tab}
-          nextTitle={"Next"}
-          backTitle={"Back"}
+          nextTitle={"Suivant"}
+          backTitle={"Retour"}
         />
       </form>
     </Paper>

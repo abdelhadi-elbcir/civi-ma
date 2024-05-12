@@ -5,10 +5,19 @@
   align-items: center;
 }
 
-.MuiButtonBase-root.MuiButton-root.outlined-btn,
+
 .MuiButtonBase-root.MuiButton-root.contained-btn {
   text-transform: capitalize;
   width: 100px;
+  background-color: #007456;
 }
 
+
+
+.MuiButtonBase-root.MuiButton-root.outlined-btn {
+  text-transform: capitalize;
+  width: 100px;
+  color: #007456;
+  border-color: #007456;
+}
 

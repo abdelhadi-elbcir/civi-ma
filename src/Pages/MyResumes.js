@@ -129,7 +129,8 @@ const MyResumes = (props) => {
             container
             justifyContent="center"
             alignItems="center"
-            className="grid">
+            className="grid"
+          >
             {resumes.length >= 1 ? (
               resumes.map((resume, index) => {
                 return (
@@ -138,7 +139,8 @@ const MyResumes = (props) => {
                     className={`resume `}
                     id={`${index}resume`}
                     margin={2}
-                    key={index}>
+                    key={index}
+                  >
                     <Item id={`${index}ITEM`}>
                       {getTemplate(resume, index)}
                       <BlackScreen />
@@ -149,7 +151,8 @@ const MyResumes = (props) => {
                             downloadResume(index);
                           }}
                           size="medium"
-                          variant="contained">
+                          variant="contained"
+                        >
                           Download
                         </Button>
                         <Button
@@ -158,14 +161,16 @@ const MyResumes = (props) => {
                             deleteResume(resume);
                           }}
                           size="medium"
-                          variant="contained">
+                          variant="contained"
+                        >
                           Delete
                         </Button>
                         <Button
                           className="use-template-btn"
                           onClick={() => navigateToFillDetails(resume)}
                           size="medium"
-                          variant="contained">
+                          variant="contained"
+                        >
                           Edit Template
                         </Button>
                       </div>
@@ -176,8 +181,9 @@ const MyResumes = (props) => {
             ) : (
               <div className="no-resumes-container">
                 <SentimentVeryDissatisfiedIcon fontSize="large" />
-                <p className="no-resumes-text" style={{margin:'0 13px'}}>
-                <strong style={{fontSize:"20px"}}>Oops!.</strong>  You do not have any Resumes yet.  Make One to view it here.
+                <p className="no-resumes-text" style={{ margin: "0 13px" }}>
+                  <strong style={{ fontSize: "20px" }}>Oops!.</strong>
+                  Vous n'avez pas encore de CV. Créez-en un pour le voir ici.
                 </p>
               </div>
             )}

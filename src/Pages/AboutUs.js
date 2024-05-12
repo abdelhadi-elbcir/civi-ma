@@ -7,15 +7,14 @@ import EmailIcon from "@mui/icons-material/Email";
 import { Box } from "@mui/system";
 import Navbar from "../Components/Common/Navbar";
 import aboutus from "./aboutus.png";
-import aboutline from "./aboutline.png";
 
 export default function ButtonMUI() {
   return (
     <>
       <Navbar />
       <Stack p={{ xs: "15px", sm: "25px", md: "40px", lg: "60px " }}>
-        <h2 className="template-header-title">Resume Builder</h2>
-        <span><img style={{ width: "200px", height: "50px" }} src={aboutline} alt="aboutline" /></span>
+        <h2 className="template-header-title">Créateur de CV:</h2>
+        <hr style={{ marginBottom: "30px", width: "250px" }} />
         <Stack
           className="midContainer"
           direction={{
@@ -25,7 +24,8 @@ export default function ButtonMUI() {
             lg: "row",
           }}
           spacing={{ xs: 1, sm: 2, md: 4 }}
-          mt="2px">
+          mt="2px"
+        >
           <Typography
             sx={{
               fontSize: {
@@ -39,21 +39,33 @@ export default function ButtonMUI() {
                 sm: "18px",
                 lg: "25px",
               },
-              textAlign: "justify"
-            }}>
-            Welcome to our resume builder! We are a team of experienced professionals dedicated to helping job seekers create resumes and cover letters that stand out from the competition. Our mission is to provide you with the tools and resources you need to land your dream job.
-
-            We understand that the job search can be overwhelming, which is why we're here to guide you every step of the way. Our easy-to-use platform offers a variety of customizable templates and industry-specific keywords to help you craft a resume that showcases your unique skills and accomplishments.
-
-            At our resume builder, we're committed to providing you with a high-quality, affordable solution to your job search needs. Our team is always on the cutting edge of industry trends and best practices, so you can trust that your resume is in good hands.
-
-            Thank you for choosing our resume builder. We look forward to helping you achieve your career goals!
+              textAlign: "justify",
+            }}
+          >
+            Notre site est votre ressource incontournable pour tout ce qui
+            concerne les CV en français. Que vous soyez à la recherche de
+            conseils pour rédiger un CV percutant, des stratégies pour décrocher
+            le poste de vos rêves, des astuces pour vous démarquer en entretien,
+            ou des modèles prêts à l'emploi, nous avons tout ce dont vous avez
+            besoin pour réussir dans votre carrière professionnelle.
+            <br/>
+            <br/>
+            Rejoignez-nous et donnez un nouvel élan à votre parcours
+            professionnel avec des conseils pratiques, des exemples concrets et
+            des ressources indispensables. Nous sommes là pour vous accompagner
+            à chaque étape, que ce soit pour améliorer la présentation de votre
+            expérience, choisir les bons mots-clés, ou préparer des réponses
+            percutantes aux questions d'entretien.
+            <br/>
+            <br/>
+            Chez nous, vous trouverez une
+            communauté engagée, des experts prêts à partager leurs
+            connaissances, et un ensemble d'outils pour maximiser l'impact de
+            votre candidature. N'hésitez plus, faites partie de notre plateforme
+            et boostez votre carrière dès aujourd'hui!
           </Typography>
           <Stack>
-            <img className="about-img"
-              src={aboutus}
-              alt="img"
-            />
+            <img className="about-img" src={aboutus} alt="img" />
           </Stack>
         </Stack>
         <Box mt="2px">
@@ -67,8 +79,9 @@ export default function ButtonMUI() {
               },
               fontWeight: "400",
               color: "dark",
-            }}>
-            Share with your friends
+            }}
+          >
+            Partage avec tes amis
           </Typography>
           <Box className="icons">
             <LinkedInIcon
