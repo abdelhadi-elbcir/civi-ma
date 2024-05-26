@@ -298,22 +298,6 @@ const PersonalInfoComponent = (props) => {
             error={errors.state ? true : false}
             errorMessage={errors.state ? errors.state.message : null}
           />
-          <InputComponent
-            title={"Code Postal"}
-            type={"number"}
-            name={"postalCode"}
-            register={register}
-            multiline={false}
-            value={props.personalInfo.postalCode}
-            setValue={(value) =>
-              props.onAddPersonalInfo({
-                ...props.personalInfo,
-                postalCode: value,
-              })
-            }
-            error={errors.postalCode ? true : false}
-            errorMessage={errors.postalCode ? errors.postalCode.message : null}
-          />
         </div>
         <InputComponent
           title={"Decsription"}

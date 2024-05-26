@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "../Styles/WorkExperienceComponent.css";
 import { connect } from "react-redux";
 import BackNextBtnComponent from "./BackNextBtnComponent";
-import { addAllExperience, addExperience } from "../Redux/actions";
+import { addAllExperience } from "../Redux/actions";
 import { useForm, Controller } from "react-hook-form";
 import InputComponent from "./InputComponent";
 import SelectComponent from "./SelectComponent";
@@ -13,7 +13,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setExperience: (experience) => dispatch(addExperience(experience)),
   setAllExperience: (experiences) => dispatch(addAllExperience(experiences)),
 });
 
@@ -38,35 +37,20 @@ const WorkExperienceComponent = (props) => {
   };
 
   const handleNext = (data) => {
-    // console.log(data);
     setLoading(true);
 
-    let experienceOne = {};
-    let experienceTwo = {};
-    let experienceThree = {};
-    let experienceFour = {};
-
-    for (let index in data) {
-      // console.log(index.slice(0, index.length));
-      if (index.includes("1")) {
-        experienceOne[index.slice(0, index.length - 1)] = data[index];
-      } else {
-        experienceTwo[index.slice(0, index.length - 1)] = data[index];
+    const experiences = Object.entries(data).reduce((acc, [key, value]) => {
+      const [field, id] = key.split("_");
+      if (!acc[id]) {
+        acc[id] = { id: parseInt(id) };
       }
-    }
+      acc[id][field] = value;
+      return acc;
+    }, {});
 
-    // console.log(experienceOne, experienceTwo);
+    const experiencesArray = Object.values(experiences);
 
-    if (Object.keys(experienceTwo).length) {
-      props.setAllExperience([
-        { ...experienceOne, id: 1 },
-        { ...experienceTwo, id: 2 },
-        experienceThree && { ...experienceThree, id: 3 },
-        experienceFour && { ...experienceFour, id: 4 },
-      ].filter(Boolean));
-    } else {
-      props.setAllExperience([{ ...experienceOne, id: 1 }]);
-    }
+    props.setAllExperience(experiencesArray);
 
     setTimeout(() => {
       setLoading(false);
@@ -74,92 +58,74 @@ const WorkExperienceComponent = (props) => {
     }, 1000);
   };
 
-  // console.log(props.experiences, errors);
-
   const addNewExperience = () => {
-    props.setExperience({
-      id: props.experiences.length + 1,
-      jobTitle: "",
-      organizationName: "",
-      startYear: "",
-      endYear: "",
-    });
-  };
-
-  const editJobTitleExperience = (value, id) => {
-    const newExperiences = props.experiences.map((experience) => {
-      if (experience.id === id) {
-        return { ...experience, jobTitle: value };
-      } else return experience;
-    });
-
-    props.setAllExperience(newExperiences);
-  };
-
-  const editOrganisationNameExperience = (value, id) => {
-    const newExperiences = props.experiences.map((experience) => {
-      if (experience.id === id) {
-        return { ...experience, organizationName: value };
-      } else return experience;
-    });
-
-    props.setAllExperience(newExperiences);
+    const newId = props.experiences.length + 1;
+    props.setAllExperience([
+      ...props.experiences,
+      {
+        id: newId,
+        jobTitle: "",
+        organizationName: "",
+        startYear: "",
+        endYear: "",
+      },
+    ]);
   };
 
   return (
     <Paper className="work-experience-paper" elevation={3}>
-      <h2 className="work-experience-heading">L'expérience professionnelle</h2>
+      <h2 className="work-experience-heading">Work Experience</h2>
       <form onSubmit={handleSubmit(handleNext)}>
         {props.experiences.map((experience) => {
           return (
             <div key={experience.id} className="experience-cont">
-              <h3 className="experience-heading">Expérience {experience.id}</h3>
+              <h3 className="experience-heading">
+                Experience {experience.id}
+              </h3>
               <Divider sx={{ margin: "5px 0px" }} />
               <div className="experience-form-cont">
                 <InputComponent
-                  title={"Titre d'emploi"}
+                  title={"Job Title"}
                   type={"text"}
-                  name={"jobTitle" + experience.id}
+                  name={`jobTitle_${experience.id}`}
                   register={register}
                   multiline={false}
-                  value={experience.jobTitle}
-                  setValue={(value) =>
-                    editJobTitleExperience(value, experience.id)
-                  }
-                  error={Boolean(errors[`jobTitle${experience.id}`])}
+                  defaultValue={experience.jobTitle}
+                  error={Boolean(
+                    errors[`jobTitle_${experience.id}`]
+                  )}
                   errorMessage={
-                    errors[`jobTitle${experience.id}`]
-                      ? errors[`jobTitle${experience.id}`].message
+                    errors[`jobTitle_${experience.id}`]
+                      ? errors[`jobTitle_${experience.id}`].message
                       : null
                   }
                 />
                 <InputComponent
-                  title={"nom de l'organisation"}
+                  title={"Organization Name"}
                   type={"text"}
-                  name={"organizationName" + experience.id}
+                  name={`organizationName_${experience.id}`}
                   register={register}
                   multiline={false}
-                  value={experience.organizationName}
-                  setValue={(value) =>
-                    editOrganisationNameExperience(value, experience.id)
-                  }
-                  error={
-                    errors[`organizationName${experience.id}`] ? true : false
-                  }
+                  defaultValue={experience.organizationName}
+                  error={Boolean(
+                    errors[`organizationName_${experience.id}`]
+                  )}
                   errorMessage={
-                    errors[`organizationName${experience.id}`]
-                      ? errors[`organizationName${experience.id}`].message
+                    errors[`organizationName_${experience.id}`]
+                      ? errors[`organizationName_${experience.id}`].message
                       : null
                   }
                 />
                 <SelectComponent
-                  title={"Année de début"}
+                  title={"Start Year"}
                   errorMessage={
-                    errors[`startYear${experience.id}`]
-                      ? errors[`startYear${experience.id}`].message
+                    errors[`startYear_${experience.id}`]
+                      ? errors[`startYear_${experience.id}`].message
                       : null
                   }
-                  error={errors[`startYear${experience.id}`] ? true : false}
+                  error={
+                    errors[`startYear_${experience.id}`] ? true : false
+                  }
                 >
                   <Controller
                     render={(props) => {
@@ -169,7 +135,7 @@ const WorkExperienceComponent = (props) => {
                           onChange={props.field.onChange}
                           error={
                             errors
-                              ? errors[`startYear${experience.id}`]
+                              ? errors[`startYear_${experience.id}`]
                                 ? true
                                 : false
                               : false
@@ -185,20 +151,20 @@ const WorkExperienceComponent = (props) => {
                         </Select>
                       );
                     }}
-                    name={`startYear${experience.id}`}
+                    name={`startYear_${experience.id}`}
                     control={control}
                     rules={{ required: "*Please select start year" }}
                     defaultValue={experience.startYear}
                   />
                 </SelectComponent>
                 <SelectComponent
-                  title={"Fin d'année"}
+                  title={"End Year"}
                   errorMessage={
-                    errors[`endYear${experience.id}`]
-                      ? errors[`endYear${experience.id}`].message
+                    errors[`endYear_${experience.id}`]
+                      ? errors[`endYear_${experience.id}`].message
                       : null
                   }
-                  error={errors[`endYear${experience.id}`] ? true : false}
+                  error={errors[`endYear_${experience.id}`] ? true : false}
                 >
                   <Controller
                     render={(props) => (
@@ -207,7 +173,7 @@ const WorkExperienceComponent = (props) => {
                         onChange={props.field.onChange}
                         error={
                           errors
-                            ? errors[`endYear${experience.id}`]
+                            ? errors[`endYear_${experience.id}`]
                               ? true
                               : false
                             : false
@@ -222,7 +188,7 @@ const WorkExperienceComponent = (props) => {
                         })}
                       </Select>
                     )}
-                    name={"endYear" + experience.id}
+                    name={`endYear_${experience.id}`}
                     control={control}
                     rules={{ required: "*Please select end year" }}
                     defaultValue={experience.endYear}
@@ -232,32 +198,27 @@ const WorkExperienceComponent = (props) => {
             </div>
           );
         })}
-        {props.experiences.length === 4 ? null : (
-          <div className="add-new-btn-cont">
-            <Button
-              style={{ color: "#007456" }}
-              onClick={addNewExperience}
-              variant="text"
-            >
-              Ajouter une nouveau
-            </Button>
-          </div>
-        )}
+        <div className="add-new-btn-cont">
+          <Button
+            style={{ color: "#007456" }}
+            onClick={addNewExperience}
+            variant="text"
+          >
+            Add New
+          </Button>
+        </div>
         <Divider sx={{ margin: "10px 0px" }} />
         <BackNextBtnComponent
           onNext={handleNext}
           onBack={handleBack}
           loading={loading}
           tab={props.tab}
-          nextTitle={"Suivant"}
-          backTitle={"Retour"}
+          nextTitle={"Next"}
+          backTitle={"Back"}
         />
       </form>
     </Paper>
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(WorkExperienceComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(WorkExperienceComponent);
