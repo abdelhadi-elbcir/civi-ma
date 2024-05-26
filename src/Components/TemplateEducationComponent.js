@@ -4,7 +4,7 @@ import "../Styles/TemplateEducationComponent.css";
 const TemplateEducationCompnent = (props) => {
   return (
     <h3 className="template-education-details">
-      {props.education.degree} in {props.education.domain}{" "}
+      {props.education.degree} - {props.education.domain}{" "}
       <span className="template-education-university">
         {props.education.university}
       </span>
