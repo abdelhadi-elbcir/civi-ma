@@ -1,5 +1,6 @@
 import React from "react";
 import { DM_Sans } from "@next/font/google";
+
 const dm = DM_Sans({ subsets: ["latin"], weight: "700" });
 
 export default function Tsp() {
@@ -29,7 +30,7 @@ export default function Tsp() {
                     {tsp_content?.list &&
                         tsp_content.list.map((item, i) => (
                             <li
-                                className="flex flex-col items-center justify-center space-y-3 sm:items-start sm:space-y-6"
+                                className={`slide-in flex flex-col items-center justify-center space-y-3 sm:items-start sm:space-y-6`}
                                 key={i}
                             >
                                 <div

@@ -36,7 +36,7 @@ export default function Cards() {
               {/* Left Content */}
               <div
                 className={`flex flex-col justify-center space-y-4 lg:space-y-8 ${
-                  i % 2 === 0 ? "order-2 sm:order-1" : "order-1 sm:order-2"
+                  i % 2 === 0 ? "sm:order-1" : "sm:order-2"
                 }`}
               >
                 <h1
@@ -52,7 +52,7 @@ export default function Cards() {
               {/* Right Image */}
               <div
                 className={`cursor-pointer lg:p-8 ${
-                  i % 2 === 0 ? "order-1 sm:order-2" : "order-2 sm:order-1"
+                  i % 2 === 0 ? "sm:order-2" : "sm:order-1"
                 }`}
               >
                 <Image
@@ -76,7 +76,7 @@ export default function Cards() {
           <p className="text-white">© Copyright 2024, Tous droits réservés</p>
           <div className="flex flex-col space-y-2 pt-10 md:flex-row md:space-y-0">
             <Link href={"https://wadifaty.ma"} className="rounded-lg bg-yellow-300 p-6 font-semibold text-black transition hover:bg-yellow-200 ">
-            Commencer maintenant
+              Commencer maintenant
             </Link>
           </div>
         </div>
