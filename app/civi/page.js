@@ -3,6 +3,7 @@
 import { useSelector } from "react-redux";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
+import { useEffect, useState } from "react";
 
 export default function CiviPage() {
     const competencesList = useSelector(state => state.competences);
@@ -11,63 +12,81 @@ export default function CiviPage() {
     const educationsList = useSelector(state => state.educations);
     const generalInfo = useSelector(state => state.generalInfo);
 
+    const [scale, setScale] = useState(1);
+
+    useEffect(() => {
+        const updateScale = () => {
+            const a4WidthMm = 210;
+            const containerWidth = document.getElementById("resumeContainer").offsetWidth;
+            const newScale = containerWidth / (a4WidthMm * 3.7795275591);
+            setScale(newScale);
+        };
+
+        updateScale();
+        window.addEventListener('resize', updateScale);
+        return () => window.removeEventListener('resize', updateScale);
+    }, []);
+
     const handleDownloadPDF = async () => {
         const element = document.getElementById("resumeContent");
         if (!element) return;
 
-        // Define A4 dimensions in pixels
-        const a4WidthPx = 210 * 3.7795275591; // 210 mm to pixels
-        const a4HeightPx = 297 * 3.7795275591; // 297 mm to pixels
+        const a4WidthPx = 210 * 3.7795275591;
+        const a4HeightPx = 297 * 3.7795275591;
 
-        // Capture the content of the element
-        const canvas = await html2canvas(element, {
-            scale: 2, // Higher scale for better resolution
+        const clone = element.cloneNode(true);
+        clone.style.transform = 'none';
+        clone.style.width = `${a4WidthPx}px`;
+        clone.style.height = `${a4HeightPx}px`;
+        clone.style.position = 'absolute';
+        clone.style.left = '-9999px';
+        document.body.appendChild(clone);
+
+        const canvas = await html2canvas(clone, {
+            scale: 2,
+            useCORS: true,
             width: a4WidthPx,
-            height: a4HeightPx,
-            useCORS: true, // Allow cross-origin images
+            height: a4HeightPx
         });
+
+        document.body.removeChild(clone);
 
         const imgData = canvas.toDataURL("image/png");
 
-        // Create a new jsPDF instance with A4 size
         const pdf = new jsPDF({
-            orientation: 'portrait', // or 'landscape'
-            unit: 'px', // Use 'px' to match the canvas dimensions
-            format: [a4WidthPx, a4HeightPx]
+            orientation: 'portrait',
+            unit: 'mm',
+            format: 'a4'
         });
 
-        const imgWidth = a4WidthPx;
-        const imgHeight = canvas.height * imgWidth / canvas.width;
+        pdf.addImage(imgData, 'PNG', 0, 0, 210, 297);
 
-        let position = 0;
-        let heightLeft = imgHeight;
-
-        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-        heightLeft -= a4HeightPx;
-
-        while (heightLeft > 0) {
-            pdf.addPage();
-            position = heightLeft - imgHeight;
-            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-            heightLeft -= a4HeightPx;
-        }
-
-        // Save the PDF
         pdf.save("resume.pdf");
+    };
+
+    const resumeStyle = {
+        width: '200mm',
+        minHeight: '297mm',
+        padding: '20mm',
+        margin: '0 auto',
+        backgroundColor: '#ffffff',
+        boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+        transform: `scale(${scale})`,
+        transformOrigin: 'top left',
     };
 
     return (
         <div className="bg-gray-100 font-sans">
-            <div style={{ maxWidth: '210mm', margin: '0 auto', padding: '16px' }}>
+            <div id="resumeContainer" style={{ maxWidth: '210mm', margin: '0 auto', padding: '16px' }}>
                 <button
                     onClick={handleDownloadPDF}
                     style={{ marginBottom: '24px', width: '100%', borderRadius: '8px', backgroundColor: '#ecc94b', padding: '12px', fontWeight: '600', color: '#000', cursor: 'pointer', transition: 'background-color 0.3s' }}
                     onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#d69e2e'}
                     onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#ecc94b'}
                 >
-                    Download Resume as PDF
+                    Télécharger Votre CV PDF
                 </button>
-                <div id="resumeContent" style={{ backgroundColor: '#ffffff', padding: '24px', borderRadius: '8px', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', width: '100%' }}>
+                <div id="resumeContent" style={resumeStyle}>
                     <h1 style={{ fontSize: '24px', fontWeight: '600' }}>{generalInfo.nom} {generalInfo.prenom}</h1>
                     <p style={{ color: '#4a5568', fontSize: '18px' }}>{generalInfo.titre}</p>
 
@@ -84,25 +103,23 @@ export default function CiviPage() {
                         {generalInfo.github && <li>GitHub: <a href={generalInfo.github} style={{ color: '#3182ce', textDecoration: 'underline' }}>{generalInfo.github}</a></li>}
                     </ul>
 
-                    <h2 style={{ fontSize: '20px', fontWeight: '600', marginTop: '16px', marginBottom: '8px' }}>Education</h2>
+                    <h2 style={{ fontSize: '20px', fontWeight: '600', marginTop: '16px', marginBottom: '8px' }}>Éducation</h2>
                     {educationsList.map((edu, index) => (
                         <div key={index} style={{ marginBottom: '16px' }}>
-                            <h3 style={{ fontSize: '18px', fontWeight: '600' }}>{edu.titre}</h3>
-                            <p style={{ color: '#2d3748', fontSize: '14px' }}>From {edu.entreprise}</p>
-                            <p style={{ color: '#4a5568', fontSize: '14px' }}>{edu.date}</p>
+                            <h3 style={{ fontSize: '18px', fontWeight: '600' }}>{edu.diplome}</h3>
+                            <p style={{ color: '#2d3748', fontSize: '14px' }}>{edu.etablissement} - {edu.annee} ({edu.statut})</p>
                         </div>
                     ))}
 
-                    <h2 style={{ fontSize: '20px', fontWeight: '600', marginTop: '16px', marginBottom: '8px' }}>Experience</h2>
+                    <h2 style={{ fontSize: '20px', fontWeight: '600', marginTop: '16px', marginBottom: '8px' }}>Expériences professionnelles</h2>
                     {experiencesList.map((exp, index) => (
                         <div key={index} style={{ marginBottom: '16px' }}>
-                            <h3 style={{ fontSize: '18px', fontWeight: '600' }}>{exp.titre} at {exp.entreprise}</h3>
-                            <p style={{ color: '#2d3748', fontSize: '14px' }}>{exp.description}</p>
-                            <p style={{ color: '#4a5568', fontSize: '14px' }}>{exp.periode}</p>
+                            <h3 style={{ fontSize: '18px', fontWeight: '600' }}>{exp.poste} - {exp.entreprise}</h3>
+                            <p style={{ color: '#2d3748', fontSize: '14px' }}>{exp.description} - {exp.annee}</p>
                         </div>
                     ))}
 
-                    <h2 style={{ fontSize: '20px', fontWeight: '600', marginTop: '16px', marginBottom: '8px' }}>Skills</h2>
+                    <h2 style={{ fontSize: '20px', fontWeight: '600', marginTop: '16px', marginBottom: '8px' }}>Compétences</h2>
                     <ul style={{ listStyleType: 'disc', paddingLeft: '20px', color: '#2d3748', fontSize: '16px' }}>
                         {competencesList.map((comp, index) => (
                             <li key={index}>{comp}</li>
@@ -112,7 +129,7 @@ export default function CiviPage() {
                     <h2 style={{ fontSize: '20px', fontWeight: '600', marginTop: '16px', marginBottom: '8px' }}>Certificates</h2>
                     <ul style={{ listStyleType: 'disc', paddingLeft: '20px', color: '#2d3748', fontSize: '16px' }}>
                         {certificatsList.map((cert, index) => (
-                            <li key={index}>{cert.titre} at {cert.entreprise}</li>
+                            <li key={index}>{cert.titre} - {cert.entreprise}</li>
                         ))}
                     </ul>
                 </div>
@@ -122,7 +139,7 @@ export default function CiviPage() {
                     onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#d69e2e'}
                     onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#ecc94b'}
                 >
-                    Download Resume as PDF
+                    Télécharger Votre CV PDF
                 </button>
             </div>
         </div>
