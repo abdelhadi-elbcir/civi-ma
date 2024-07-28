@@ -8,15 +8,23 @@ export default function Menu({ menu }) {
     {
       title: "Acceuil",
       active: true,
+      link: "/"
     },
     {
       title: "Pourquoi Civi",
+      link : "/a-propos"
+    },
+    {
+      title: "Articles",
+      link : "/articles"
     },
     {
       title: "Comment ça fonctionne",
+      link : "/a-propos"
     },
     {
       title: "À propos",
+      link : "/a-propos"
     },
   ];
   return (
@@ -37,7 +45,7 @@ export default function Menu({ menu }) {
                   } py-4 transition hover:text-[#007456]`}
                   key={i}
                 >
-                    <Link href={"/a-propos"}>
+                    <Link href={item.link}>
                       {item?.title}
                     </Link>
                 </li>

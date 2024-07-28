@@ -15,11 +15,20 @@ export default function Header() {
     menu: [
       {
         title: "Pourquoi Civi",
+        link : "/a-propos"
+      },
+      {
+        title: "Articles",
+        link : "/articles"
       },
       {
         title: "Comment ça fonctionne",
+        link : "/a-propos"
       },
-      { title: "À propos" },
+      { 
+        title: "À propos" ,
+        link : "/a-propos"
+      },
     ],
   };
   return (
@@ -44,7 +53,7 @@ export default function Header() {
                 className="cursor-pointer transition hover:text-[#007456]"
                 key={i}
               >
-                <Link href={"/a-propos"}>{item?.title}</Link>
+                <Link href={item.link}>{item?.title}</Link>
               </li>
             ))}
         </ul>

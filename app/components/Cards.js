@@ -33,22 +33,6 @@ export default function Cards() {
         {content &&
           content.map((item, i) => (
             <div key={i} className="grid grid-cols-1 gap-8 md:grid-cols-2 ">
-              {/* Left Content */}
-              <div
-                className={`flex flex-col justify-center space-y-4 lg:space-y-8 ${
-                  i % 2 === 0 ? "sm:order-1" : "sm:order-2"
-                }`}
-              >
-                <h1
-                  className={`${dm.className} text-4xl font-bold text-dark-blue lg:text-7xl`}
-                >
-                  {item?.title}
-                </h1>
-                <p className="max-w-lg text-lg text-gray-600 lg:text-xl">
-                  {item?.description}
-                </p>
-              </div>
-
               {/* Right Image */}
               <div
                 className={`cursor-pointer lg:p-8 ${
@@ -63,6 +47,21 @@ export default function Cards() {
                   height={450}
                   priority
                 />
+              </div>
+               {/* Left Content */}
+               <div
+                className={`flex flex-col justify-center space-y-4 lg:space-y-8 ${
+                  i % 2 === 0 ? "sm:order-1" : "sm:order-2"
+                }`}
+              >
+                <h1
+                  className={`${dm.className} text-4xl font-bold text-dark-blue lg:text-7xl`}
+                >
+                  {item?.title}
+                </h1>
+                <p className="max-w-lg text-lg text-gray-600 lg:text-xl">
+                  {item?.description}
+                </p>
               </div>
             </div>
           ))}
