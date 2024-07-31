@@ -32,7 +32,7 @@ export default function CompetencePage() {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(setCompetencesList(competences));
-        router.push('/civi')
+        router.push('/langages')
     };
 
     useEffect(()=>{

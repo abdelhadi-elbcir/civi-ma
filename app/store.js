@@ -4,6 +4,7 @@ import educationsReducer from './slices/educationsSlice';
 import certificatesReducer from './slices/certificatesSlice';
 import experiencesReducer from './slices/experiencesSlice';
 import competencesReducer from './slices/competencesSlice';
+import langagesReducer from './slices/langagesSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     certificates: certificatesReducer,
     experiences: experiencesReducer,
     competences: competencesReducer,
+    langages: langagesReducer
   },
 });
 

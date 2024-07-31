@@ -11,6 +11,7 @@ export default function CiviPage() {
     const experiencesList = useSelector(state => state.experiences);
     const educationsList = useSelector(state => state.educations);
     const generalInfo = useSelector(state => state.generalInfo);
+    const langagesList = useSelector(state => state.langages);
 
     const [scale, setScale] = useState(1);
 
@@ -102,7 +103,7 @@ export default function CiviPage() {
                         {generalInfo.linkedin && <li>LinkedIn: <a href={generalInfo.linkedin} style={{ color: '#3182ce', textDecoration: 'underline' }}>{generalInfo.linkedin}</a></li>}
                         {generalInfo.github && <li>GitHub: <a href={generalInfo.github} style={{ color: '#3182ce', textDecoration: 'underline' }}>{generalInfo.github}</a></li>}
                     </ul>
-
+                    <hr style={{ borderBottom: "1px dashed black" }}/>
                     <h2 style={{ fontSize: '20px', fontWeight: '600', marginTop: '16px', marginBottom: '8px' }}>Éducation</h2>
                     {educationsList.map((edu, index) => (
                         <div key={index} style={{ marginBottom: '16px' }}>
@@ -110,7 +111,7 @@ export default function CiviPage() {
                             <p style={{ color: '#2d3748', fontSize: '14px' }}>{edu.etablissement} - {edu.annee} ({edu.statut})</p>
                         </div>
                     ))}
-
+                    <hr style={{ borderBottom: "1px dashed black" }}/>
                     <h2 style={{ fontSize: '20px', fontWeight: '600', marginTop: '16px', marginBottom: '8px' }}>Expériences professionnelles</h2>
                     {experiencesList.map((exp, index) => (
                         <div key={index} style={{ marginBottom: '16px' }}>
@@ -118,14 +119,21 @@ export default function CiviPage() {
                             <p style={{ color: '#2d3748', fontSize: '14px' }}>{exp.description} - {exp.annee}</p>
                         </div>
                     ))}
-
+                    <hr style={{ borderBottom: "1px dashed black" }}/>
                     <h2 style={{ fontSize: '20px', fontWeight: '600', marginTop: '16px', marginBottom: '8px' }}>Compétences</h2>
                     <ul style={{ listStyleType: 'disc', paddingLeft: '20px', color: '#2d3748', fontSize: '16px' }}>
                         {competencesList.map((comp, index) => (
                             <li key={index}>{comp}</li>
                         ))}
                     </ul>
-
+                    <hr style={{ borderBottom: "1px dashed black" }}/>
+                    <h2 style={{ fontSize: '20px', fontWeight: '600', marginTop: '16px', marginBottom: '8px' }}>Langues</h2>
+                    <ul style={{ listStyleType: 'disc', paddingLeft: '20px', color: '#2d3748', fontSize: '16px' }}>
+                        {langagesList.map((lang, index) => (
+                            <li key={index}>{lang.langage} : {lang.niveau}</li>
+                        ))}
+                    </ul>
+                    <hr style={{ borderBottom: "1px dashed black" }}/>
                     <h2 style={{ fontSize: '20px', fontWeight: '600', marginTop: '16px', marginBottom: '8px' }}>Certificates</h2>
                     <ul style={{ listStyleType: 'disc', paddingLeft: '20px', color: '#2d3748', fontSize: '16px' }}>
                         {certificatsList.map((cert, index) => (

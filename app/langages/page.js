@@ -2,91 +2,96 @@
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCertificatsList } from "../slices/certificatesSlice";
+import { setLangagesList } from "../slices/langagesSlice";
 import { useRouter } from 'next/navigation';
 
 export default function LangagePage() {
-    const [certificats, setCertificats] = useState([
+    const [langages, setLangages] = useState([
         {
-            titre: "",
-            entreprise: "",
+            langage: "",
+            niveau: "",
         },
     ]);
-    const certificatsList = useSelector(state => state.certificates);
+    const langagesList = useSelector(state => state.langages); // Ensure this matches your state structure
     const dispatch = useDispatch();
     const router = useRouter();
 
     const handleChange = (index, e) => {
         const { name, value } = e.target;
-        const updatedCertificats = certificats.map((cert, certIndex) => {
-            if (certIndex === index) {
-                return { ...cert, [name]: value };
+        const updatedLangages = langages.map((lang, langIndex) => {
+            if (langIndex === index) {
+                return { ...lang, [name]: value };
             }
-            return cert;
+            return lang;
         });
-        setCertificats(updatedCertificats);
+        setLangages(updatedLangages);
     };
 
-    const addCertificat = () => {
-        setCertificats([...certificats, { titre: "", entreprise: "" }]);
+    const addLangage = () => {
+        setLangages([...langages, { langage: "", niveau: "" }]);
     };
 
-    const deleteCertificat = (index) => {
-        setCertificats(certificats.filter((_, certIndex) => certIndex !== index));
+    const deleteLangage = (index) => {
+        setLangages(langages.filter((_, langIndex) => langIndex !== index));
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(setCertificatsList(certificats));
-        router.push('/competences');
+        dispatch(setLangagesList(langages));
+        router.push('/civi');
     };
 
-    const hundleBack = (e) => {
+    const handleBack = (e) => {
         e.preventDefault();
-        router.push('/experiences')
+        router.push('/competences');
     }
 
     useEffect(() => {
-        setCertificats(certificatsList);
-    }, [certificatsList]);
+        if (langagesList) {
+            setLangages(langagesList);
+        }
+    }, [langagesList]);
 
     return (
         <section className="flex w-full bg-white py-8">
             <div className="mx-auto w-full max-w-7xl px-8">
-                <h2 className="text-2xl font-bold mb-6">Certifications:</h2>
+                <h2 className="text-2xl font-bold mb-6">Langages:</h2>
                 <hr style={{ borderBottom: "1px dashed black" }}/>
                 <form onSubmit={handleSubmit} className="space-y-6">
-                    {certificats.map((cert, index) => (
-                        <div style={{borderBottom:"1px dashed black"}} key={index} className="relative p-5 grid grid-cols-1 gap-8 md:grid-cols-2">
+                    {langages.map((lang, index) => (
+                        <div style={{ borderBottom: "1px dashed black" }} key={index} className="relative p-5 grid grid-cols-1 gap-8 md:grid-cols-2">
                             <div>
                                 <label className="block mb-2 text-sm font-bold text-gray-700">
-                                    Titre
+                                    Langage
                                 </label>
                                 <input
                                     type="text"
-                                    name="titre"
-                                    value={cert.titre}
+                                    name="langage"
+                                    value={lang.langage}
                                     onChange={(e) => handleChange(index, e)}
                                     className="w-full rounded-lg p-3 border focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                                    placeholder="titre"
+                                    placeholder="Langage"
                                 />
                             </div>
                             <div>
                                 <label className="block mb-2 text-sm font-bold text-gray-700">
-                                    Entreprise
+                                    Niveau
                                 </label>
-                                <input
-                                    type="text"
-                                    name="entreprise"
-                                    value={cert.entreprise}
+                                <select
+                                    name="niveau"
+                                    value={lang.niveau}
                                     onChange={(e) => handleChange(index, e)}
                                     className="w-full rounded-lg p-3 border focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                                    placeholder="entreprise"
-                                />
+                                >
+                                    <option value="">Select Niveau</option>
+                                    <option value="Débutant">Débutant</option>
+                                    <option value="Intermédiaire">Intermédiaire</option>
+                                    <option value="Avancé">Avancé</option>
+                                </select>
                             </div>
                             <button
                                 type="button"
-                                onClick={() => deleteCertificat(index)}
+                                onClick={() => deleteLangage(index)}
                                 className="absolute top-2 right-2 rounded-full bg-red-500 p-2 text-white hover:bg-red-400"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x-square-fill" viewBox="0 0 16 16">
@@ -97,7 +102,7 @@ export default function LangagePage() {
                     ))}
                     <button
                         type="button"
-                        onClick={addCertificat}
+                        onClick={addLangage}
                         className="mt-4 rounded-lg bg-yellow-500 p-3 font-semibold text-white hover:bg-yellow-400 transition"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" className="bi bi-plus-square-fill" viewBox="0 0 16 16">
@@ -107,13 +112,13 @@ export default function LangagePage() {
                     <hr className="my-6" />
                     <div className="flex justify-between">
                         <button
-                            onClick={hundleBack}
+                            onClick={handleBack}
                             className="rounded-lg bg-gray-500 p-3 font-semibold text-white hover:bg-gray-400 transition"
                         >
                             Avant
                         </button>
                         <button
-                            onClick={handleSubmit}
+                            type="submit"
                             className="rounded-lg bg-[#007456] p-3 font-semibold text-white hover:bg-gray-400 transition"
                         >
                             Suivant
