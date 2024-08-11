@@ -38,7 +38,7 @@ export default function LangagePage() {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(setLangagesList(langages));
-        router.push('/civi');
+        router.push('/civi-canadian');
     };
 
     const handleBack = (e) => {

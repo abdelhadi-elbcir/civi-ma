@@ -85,7 +85,7 @@ export default function CiviCanadianPage() {
                     onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#0056b3'}
                     onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#007bff'}
                 >
-                    Download Resume as PDF
+                    Télécharger le CV en PDF
                 </button>
                 <div id="resumeContent" style={resumeStyle}>
                     <header style={{ borderBottom: '2px solid #007bff', paddingBottom: '10px', marginBottom: '20px' }}>
@@ -94,22 +94,22 @@ export default function CiviCanadianPage() {
                     </header>
 
                     <section style={{ marginBottom: '20px' }}>
-                        <h2 style={{ fontSize: '22px', fontWeight: '600', marginBottom: '10px' }}>Summary</h2>
+                        <h2 style={{ fontSize: '22px', fontWeight: '600', marginBottom: '10px' }}>Résumé</h2>
                         <p style={{ fontSize: '16px', color: '#343a40' }}>{generalInfo.description}</p>
                     </section>
 
                     <section style={{ marginBottom: '20px' }}>
-                        <h2 style={{ fontSize: '22px', fontWeight: '600', marginBottom: '10px' }}>Contact Information</h2>
+                        <h2 style={{ fontSize: '22px', fontWeight: '600', marginBottom: '10px' }}>Informations de Contact</h2>
                         <ul style={{ listStyleType: 'none', padding: '0', fontSize: '16px', color: '#343a40' }}>
                             <li>Email: <a href={`mailto:${generalInfo.email}`} style={{ color: '#007bff', textDecoration: 'underline' }}>{generalInfo.email}</a></li>
-                            <li>Phone: {generalInfo.tele}</li>
+                            <li>Téléphone: {generalInfo.tele}</li>
                             {generalInfo.linkedin && <li>LinkedIn: <a href={generalInfo.linkedin} style={{ color: '#007bff', textDecoration: 'underline' }}>{generalInfo.linkedin}</a></li>}
                             {generalInfo.github && <li>GitHub: <a href={generalInfo.github} style={{ color: '#007bff', textDecoration: 'underline' }}>{generalInfo.github}</a></li>}
                         </ul>
                     </section>
 
                     <section style={{ marginBottom: '20px' }}>
-                        <h2 style={{ fontSize: '22px', fontWeight: '600', marginBottom: '10px' }}>Education</h2>
+                        <h2 style={{ fontSize: '22px', fontWeight: '600', marginBottom: '10px' }}>Éducation</h2>
                         {educationsList.map((edu, index) => (
                             <div key={index} style={{ marginBottom: '15px' }}>
                                 <h3 style={{ fontSize: '18px', fontWeight: '600' }}>{edu.diplome}</h3>
@@ -119,17 +119,17 @@ export default function CiviCanadianPage() {
                     </section>
 
                     <section style={{ marginBottom: '20px' }}>
-                        <h2 style={{ fontSize: '22px', fontWeight: '600', marginBottom: '10px' }}>Professional Experience</h2>
+                        <h2 style={{ fontSize: '22px', fontWeight: '600', marginBottom: '10px' }}>Expérience Professionnelle</h2>
                         {experiencesList.map((exp, index) => (
                             <div key={index} style={{ marginBottom: '15px' }}>
-                                <h3 style={{ fontSize: '18px', fontWeight: '600' }}>{exp.poste} at {exp.entreprise}</h3>
+                                <h3 style={{ fontSize: '18px', fontWeight: '600' }}>{exp.poste} chez {exp.entreprise}</h3>
                                 <p style={{ fontSize: '16px', color: '#343a40' }}>{exp.description} - {exp.annee}</p>
                             </div>
                         ))}
                     </section>
 
                     <section style={{ marginBottom: '20px' }}>
-                        <h2 style={{ fontSize: '22px', fontWeight: '600', marginBottom: '10px' }}>Skills</h2>
+                        <h2 style={{ fontSize: '22px', fontWeight: '600', marginBottom: '10px' }}>Compétences</h2>
                         <ul style={{ listStyleType: 'disc', paddingLeft: '20px', fontSize: '16px', color: '#343a40' }}>
                             {competencesList.map((comp, index) => (
                                 <li key={index}>{comp}</li>
@@ -138,7 +138,7 @@ export default function CiviCanadianPage() {
                     </section>
 
                     <section style={{ marginBottom: '20px' }}>
-                        <h2 style={{ fontSize: '22px', fontWeight: '600', marginBottom: '10px' }}>Languages</h2>
+                        <h2 style={{ fontSize: '22px', fontWeight: '600', marginBottom: '10px' }}>Langues</h2>
                         <ul style={{ listStyleType: 'disc', paddingLeft: '20px', fontSize: '16px', color: '#343a40' }}>
                             {langagesList.map((lang, index) => (
                                 <li key={index}>{lang.langage} - {lang.niveau}</li>
@@ -161,7 +161,7 @@ export default function CiviCanadianPage() {
                     onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#0056b3'}
                     onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#007bff'}
                 >
-                    Download Resume as PDF
+                    Télécharger le CV en PDF
                 </button>
             </div>
         </div>
